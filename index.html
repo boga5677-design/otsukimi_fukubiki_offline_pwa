@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#102858">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="月見福引">
+<link rel="manifest" href="manifest.webmanifest">
+<title>お月見まつり｜福引轉輪</title>
+<style>
+:root{
+  --night:#0d2450;--night2:#081936;--cream:#fff6dc;--red:#e84a45;--red2:#b83131;
+  --gold:#ffd75c;--wood:#c9894d;--woodDark:#70462e;--ink:#3e3140;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",system-ui,sans-serif}
+body{color:#fff;background:
+radial-gradient(circle at 82% 11%,#fff0a8 0 54px,#f6cd5b 55px 63px,transparent 64px),
+linear-gradient(180deg,#173a73 0%,var(--night) 57%,var(--night2) 100%);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.55;background:
+radial-gradient(circle at 13% 14%,#fff 0 1.8px,transparent 2.4px),
+radial-gradient(circle at 33% 8%,#fff 0 1.8px,transparent 2.4px),
+radial-gradient(circle at 61% 17%,#fff 0 1.8px,transparent 2.4px);
+background-size:210px 170px,240px 190px,270px 180px}
+header{position:relative;z-index:2;max-width:1120px;margin:auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-weight:1000}.tools{display:flex;gap:8px}.tool{border:3px solid #fff;border-radius:15px;background:#ffffff18;color:#fff;padding:8px 12px;font-weight:900;cursor:pointer}
+main{position:relative;z-index:1;max-width:1120px;margin:auto;padding:0 16px 38px;text-align:center}
+.lanterns{display:flex;justify-content:center;gap:34px;margin:3px 0 5px}.lantern{width:43px;height:55px;border-radius:15px;background:#ef5750;border:4px solid #743338;box-shadow:0 5px 0 #0002}
+h1{font-size:clamp(2.05rem,7vw,4.4rem);margin:6px 0 0;text-shadow:0 5px 0 #08152d;font-weight:1000}
+.sub{color:#ffe59a;font-weight:900}
+.game{display:grid;grid-template-columns:1fr;align-items:center;gap:10px}
+.machineBox{height:520px;display:grid;place-items:center}
+.machine{width:430px;height:485px;max-width:94vw;position:relative}
+.stand{position:absolute;left:50%;bottom:45px;transform:translateX(-50%);width:260px;height:180px;background:linear-gradient(#d59b61,#b86e3b);border:7px solid var(--woodDark);clip-path:polygon(28% 0,72% 0,100% 100%,0 100%);z-index:1}
+.stand:after{content:"";position:absolute;left:50%;top:58px;transform:translateX(-50%);width:90px;height:72px;background:#e9b97c;border:5px solid #805237;clip-path:polygon(18% 0,82% 0,100% 100%,0 100%)}
+.base{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:320px;height:72px;border-radius:12px;background:linear-gradient(#9e6137,#70432a);border:7px solid #4f3327;box-shadow:0 10px 0 #0003}
+.wheelFrame{position:absolute;left:50%;top:20px;width:318px;height:318px;transform:translateX(-50%);border-radius:50%;background:#e9b96e;border:9px solid #5c3b2d;box-shadow:0 12px 0 #0003;z-index:4}
+.pointer{position:absolute;left:50%;top:4px;transform:translateX(-50%);z-index:12;width:0;height:0;border-left:18px solid transparent;border-right:18px solid transparent;border-top:34px solid #ffd65c;filter:drop-shadow(0 4px 0 #6d472d)}
+.pointer:after{content:"";position:absolute;left:-11px;top:-33px;width:22px;height:22px;background:#ef4d47;border:4px solid #6c3434;border-radius:50%}
+.wheel{position:absolute;inset:13px;border-radius:50%;overflow:hidden;border:7px solid #fff0c7;transform:rotate(0deg);will-change:transform;background:conic-gradient(
+#e84a45 0 22.5deg,#fff4de 22.5deg 45deg,#e84a45 45deg 67.5deg,#fff4de 67.5deg 90deg,
+#e84a45 90deg 112.5deg,#fff4de 112.5deg 135deg,#e84a45 135deg 157.5deg,#fff4de 157.5deg 180deg,
+#e84a45 180deg 202.5deg,#fff4de 202.5deg 225deg,#e84a45 225deg 247.5deg,#fff4de 247.5deg 270deg,
+#e84a45 270deg 292.5deg,#fff4de 292.5deg 315deg,#e84a45 315deg 337.5deg,#fff4de 337.5deg 360deg)}
+.wheel:after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 0 4px #00000018,inset 0 0 30px #0002;pointer-events:none}
+.hub{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:82px;height:82px;border-radius:50%;display:grid;place-items:center;background:#233a75;border:8px solid #f5d28a;color:#fff;font-size:1.9rem;font-weight:1000;z-index:6;box-shadow:0 5px 0 #0003}
+.arm{position:absolute;left:50%;top:50%;width:20px;height:128px;border-radius:12px;background:#24407a;border:5px solid #5a3d35;transform-origin:50% 10px;transform:translate(-50%,-10px) rotate(18deg);z-index:7;box-shadow:0 5px 0 #0002}
+.arm:after{content:"";position:absolute;left:50%;bottom:-18px;transform:translateX(-50%);width:40px;height:40px;border-radius:50%;background:#ef504a;border:5px solid #6a3333}
+.machine.spinning .arm{animation:armWobble .22s ease-in-out 8}
+@keyframes armWobble{50%{transform:translate(-50%,-10px) rotate(28deg)}}
+.controls{text-align:center}
+.draw{min-width:275px;border:5px solid #744321;border-radius:28px;background:#ffd75b;color:#543600;padding:16px 30px;font-size:clamp(1.35rem,4vw,1.95rem);font-weight:1000;box-shadow:0 8px 0 #b87229;cursor:pointer}
+.draw:active{transform:translateY(4px);box-shadow:0 4px 0 #b87229}.draw:disabled{filter:grayscale(.7);opacity:.7}
+.hint{margin-top:13px;color:#dce7ff;font-weight:800}
+.result{display:none;margin:18px auto 0;max-width:600px;background:var(--cream);color:#47323c;border:6px solid #ffcc55;border-radius:27px;padding:21px;box-shadow:0 10px 0 #0003}
+.result.show{display:block;animation:pop .48s cubic-bezier(.2,.8,.2,1.15)}
+@keyframes pop{from{opacity:0;transform:scale(.72)}to{opacity:1;transform:scale(1)}}
+.result h2{font-size:clamp(2rem,7vw,3.4rem);color:#df4148;margin:0}.tier{font-size:1.5rem;font-weight:1000}.prize{font-size:clamp(1.4rem,5vw,2.3rem);font-weight:1000}
+.glow{animation:glow .6s ease 2}@keyframes glow{50%{filter:drop-shadow(0 0 18px #ffd75c) brightness(1.25)}}
+.panel{position:fixed;inset:0;background:#071226d9;display:none;justify-content:center;align-items:flex-start;padding:18px;overflow:auto;z-index:80}.panel.open{display:flex}
+.sheet{width:min(850px,100%);margin:22px 0;background:#fff7e3;color:#3e3140;border:6px solid #754d32;border-radius:24px;padding:20px}.close{float:right}
+.row{display:grid;grid-template-columns:1.1fr 1.5fr .55fr .55fr auto;gap:8px;margin:8px 0}
+input{width:100%;padding:9px;border:3px solid #d3b17b;border-radius:11px}
+.btn{border:0;border-radius:11px;padding:9px 12px;font-weight:900;cursor:pointer}.primary{background:#ffd35a}.danger{background:#f2c5c5;color:#8b2222}
+.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.stats{background:#efe3ca;border-radius:13px;padding:11px;margin:10px 0}
+table{width:100%;border-collapse:collapse}th,td{padding:8px;border-bottom:1px solid #dcc7a5;text-align:left}
+@media(min-width:850px){.game{grid-template-columns:1.15fr .85fr}}
+@media(max-width:650px){.machineBox{height:500px}.row{grid-template-columns:1fr 1fr 65px 65px auto}.row input:nth-child(1),.row input:nth-child(2){grid-column:span 2}}
+</style>
+</head>
+<body>
+<header><div class="logo">🌕 お月見まつり</div><div class="tools"><button class="tool" id="historyBtn">📋 紀錄</button><button class="tool" id="settingsBtn">⚙️ 設定</button></div></header>
+<main>
+<div class="lanterns"><div class="lantern"></div><div class="lantern"></div><div class="lantern"></div><div class="lantern"></div></div>
+<h1>福引き抽選会</h1><div class="sub">中秋月夜祭・福引轉輪</div>
+<section class="game">
+<div class="machineBox">
+  <div class="machine" id="machine">
+    <div class="pointer"></div>
+    <div class="wheelFrame">
+      <div class="wheel" id="wheel">
+      </div>
+      <div class="hub">福</div>
+      <div class="arm"></div>
+    </div>
+    <div class="stand"></div><div class="base"></div>
+  </div>
+</div>
+<div class="controls">
+<button class="draw" id="drawBtn">🎡 まわす！<br>轉一轉！</button>
+<div class="hint" id="hint"></div>
+<div class="result" id="result"><div style="font-size:2rem">🎊 ⭐ 🎊</div><h2>大当たり！</h2><div class="tier" id="tier"></div><div class="prize" id="prize"></div><div style="margin-top:13px"><button class="btn primary" id="next">下一位 👧👦</button></div></div>
+</div>
+</section>
+</main>
+
+<div class="panel" id="settingsPanel"><div class="sheet"><button class="btn close" onclick="closePanels()">✕</button><h2>⚙️ 家長設定</h2><p>獎項、獎品、數量與權重皆可編輯。</p><div id="editor"></div><div class="actions"><button class="btn primary" id="add">＋新增獎項</button><button class="btn" id="save">💾 儲存</button><button class="btn" id="backup">📦 匯出 JSON</button><label class="btn" style="background:#eee;cursor:pointer">📥 匯入 JSON<input id="import" type="file" accept=".json" style="display:none"></label><button class="btn danger" id="reset">♻️ 恢復預設</button></div></div></div>
+<div class="panel" id="historyPanel"><div class="sheet"><button class="btn close" onclick="closePanels()">✕</button><h2>📋 抽獎紀錄</h2><div class="stats" id="stats"></div><div style="overflow:auto;max-height:48vh"><table><thead><tr><th>#</th><th>時間</th><th>獎項</th><th>獎品</th></tr></thead><tbody id="tbody"></tbody></table></div><div class="actions"><button class="btn primary" id="csv">📤 匯出 CSV</button><button class="btn danger" id="clear">🗑️ 清除紀錄</button></div></div></div>
+
+<script>
+const DEFAULTS=[
+{tier:"👑 特賞",name:"🎁 神秘大玩具",qty:1,weight:1},
+{tier:"🥇 一等賞",name:"🚗 小汽車／玩具",qty:2,weight:2},
+{tier:"🥈 二等賞",name:"🫧 泡泡玩具",qty:3,weight:4},
+{tier:"🥉 三等賞",name:"📚 水畫冊／貼紙書",qty:4,weight:6},
+{tier:"🍭 お菓子賞",name:"🍪 小朋友零食包",qty:6,weight:10},
+{tier:"🌟 わくわく賞",name:"⭐ 可愛貼紙",qty:8,weight:14}
+];
+let prizes=JSON.parse(localStorage.getItem("wheelPrizes")||"null")||structuredClone(DEFAULTS);
+let history=JSON.parse(localStorage.getItem("wheelHistory")||"[]");
+let currentRotation=0;
+const $=s=>document.querySelector(s);
+function saveData(){localStorage.setItem("wheelPrizes",JSON.stringify(prizes));localStorage.setItem("wheelHistory",JSON.stringify(history))}
+function remaining(){return prizes.reduce((a,p)=>a+Math.max(0,+p.qty||0),0)}
+function update(){const n=remaining();$("#hint").textContent=n?`目前還有 ${n} 份獎品 ✨`:"獎品已全部抽完！";$("#drawBtn").disabled=!n}
+function choose(){const a=prizes.filter(p=>p.qty>0&&p.weight>0);if(!a.length)return null;let total=a.reduce((s,p)=>s+(+p.weight),0),r=Math.random()*total;for(const p of a){r-=+p.weight;if(r<=0)return p}return a.at(-1)}
+function confetti(){for(let i=0;i<30;i++){const d=document.createElement("div");d.textContent=["⭐","✨","🎊","🌸"][Math.floor(Math.random()*4)];Object.assign(d.style,{position:"fixed",zIndex:70,left:(10+Math.random()*80)+"vw",top:"44vh",fontSize:(15+Math.random()*22)+"px",pointerEvents:"none",transition:"transform 1.5s ease,opacity 1.5s"});document.body.appendChild(d);requestAnimationFrame(()=>{d.style.transform=`translate(${(Math.random()-.5)*450}px,${120+Math.random()*400}px) rotate(${Math.random()*720}deg)`;d.style.opacity=0});setTimeout(()=>d.remove(),1550)}}
+$("#drawBtn").onclick=()=>{
+  const p=choose(); if(!p)return;
+  $("#drawBtn").disabled=true; $("#result").classList.remove("show"); $("#machine").classList.add("spinning");
+  $("#wheel").classList.remove("glow");
+  const extraTurns=6+Math.floor(Math.random()*3);
+  const stopOffset=Math.floor(Math.random()*360);
+  currentRotation += extraTurns*360 + stopOffset;
+  $("#wheel").style.transition="transform 4.6s cubic-bezier(.08,.72,.18,1)";
+  $("#wheel").style.transform=`rotate(${currentRotation}deg)`;
+  setTimeout(()=>{
+    p.qty--;history.unshift({time:new Date().toLocaleString("zh-TW"),tier:p.tier,name:p.name});saveData();renderHistory();update();
+    $("#tier").textContent=p.tier;$("#prize").textContent=p.name;$("#result").classList.add("show");
+    $("#wheel").classList.add("glow");$("#machine").classList.remove("spinning");confetti();
+    if(navigator.vibrate)navigator.vibrate([50,40,100]);
+  },4700);
+};
+$("#next").onclick=()=>{$("#result").classList.remove("show");$("#wheel").classList.remove("glow");update()}
+function openP(id){closePanels();$(id).classList.add("open")}function closePanels(){document.querySelectorAll(".panel").forEach(x=>x.classList.remove("open"))}window.closePanels=closePanels;
+$("#settingsBtn").onclick=()=>{renderEditor();openP("#settingsPanel")};$("#historyBtn").onclick=()=>{renderHistory();openP("#historyPanel")}
+function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]))}
+function renderEditor(){const e=$("#editor");e.innerHTML="";prizes.forEach((p,i)=>{const r=document.createElement("div");r.className="row";r.innerHTML=`<input data-k="tier" value="${esc(p.tier)}"><input data-k="name" value="${esc(p.name)}"><input data-k="qty" type="number" min="0" value="${p.qty}"><input data-k="weight" type="number" min="0" value="${p.weight}"><button class="btn danger">刪除</button>`;r.querySelector("button").onclick=()=>{prizes.splice(i,1);renderEditor()};e.appendChild(r)})}
+$("#add").onclick=()=>{prizes.push({tier:"新獎項",name:"新獎品",qty:1,weight:1});renderEditor()}
+$("#save").onclick=()=>{document.querySelectorAll("#editor .row").forEach((r,i)=>{prizes[i].tier=r.querySelector('[data-k="tier"]').value||"未命名";prizes[i].name=r.querySelector('[data-k="name"]').value||"未命名";prizes[i].qty=Math.max(0,+r.querySelector('[data-k="qty"]').value||0);prizes[i].weight=Math.max(0,+r.querySelector('[data-k="weight"]').value||0)});saveData();update();alert("設定已儲存！")}
+function renderHistory(){$("#tbody").innerHTML=history.map((h,i)=>`<tr><td>${history.length-i}</td><td>${esc(h.time)}</td><td>${esc(h.tier)}</td><td>${esc(h.name)}</td></tr>`).join("");$("#stats").textContent=`已抽 ${history.length} 次｜剩餘 ${remaining()} 份獎品`}
+function dl(name,text,type){const b=new Blob([text],{type}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)}
+$("#csv").onclick=()=>{const rows=[["順序","抽獎時間","獎項","獎品"],...history.slice().reverse().map((h,i)=>[i+1,h.time,h.tier,h.name])];dl("福引轉輪抽獎紀錄.csv","\uFEFF"+rows.map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(",")).join("\n"),"text/csv;charset=utf-8")}
+$("#backup").onclick=()=>dl("福引轉輪備份.json",JSON.stringify({prizes,history},null,2),"application/json")
+$("#import").onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const o=JSON.parse(rd.result);if(!Array.isArray(o.prizes))throw 0;prizes=o.prizes;history=Array.isArray(o.history)?o.history:[];saveData();renderEditor();renderHistory();update();alert("匯入完成！")}catch{alert("檔案格式不正確")}};rd.readAsText(f)}
+$("#clear").onclick=()=>{if(confirm("確定清除所有紀錄？")){history=[];saveData();renderHistory()}}
+$("#reset").onclick=()=>{if(confirm("恢復預設獎項並清除紀錄？")){prizes=structuredClone(DEFAULTS);history=[];saveData();renderEditor();renderHistory();update()}}
+document.querySelectorAll(".panel").forEach(x=>x.onclick=e=>{if(e.target===x)closePanels()});update();renderHistory();
+</script>
+<script>
+if ("serviceWorker" in navigator && location.protocol !== "file:") {
+  window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+}
+</script>
+</body>
+</html>

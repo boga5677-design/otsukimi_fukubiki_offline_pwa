@@ -1,0 +1,12 @@
+{
+  "name": "お月見まつり・福引き抽選会",
+  "short_name": "月見福引",
+  "description": "適合親子活動的日式福引轉輪抽獎工具",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#102858",
+  "theme_color": "#102858",
+  "orientation": "any",
+  "lang": "zh-Hant"
+}
