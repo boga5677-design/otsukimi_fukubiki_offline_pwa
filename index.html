@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="月見福引">
 <link rel="manifest" href="manifest.webmanifest">
-<title>お月見まつり｜福引轉輪 V7.7</title>
+<title>お月見まつり｜福引轉輪 V7.8</title>
 <style>
 :root{
   --night:#0d2450;--night2:#081936;--cream:#fff6dc;--red:#e84a45;--red2:#b83131;
@@ -66,7 +66,7 @@ h1{font-size:clamp(2.05rem,7vw,4.4rem);margin:6px 0 0;text-shadow:0 5px 0 #08152
   border-radius:12px;z-index:7;box-shadow:0 4px 0 #0002
 }
 .centerCrank{
-  cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;
+  cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;pointer-events:auto;
   position:absolute;left:50%;top:50%;width:105px;height:20px;
   margin-left:-3px;margin-top:-10px;transform-origin:3px 10px;
   background:#8d5838;border:5px solid #553728;border-radius:12px;z-index:14
@@ -254,7 +254,7 @@ function fireworks(){
   }
   requestAnimationFrame(frame);
 }
-$("#drawBtn").onclick=()=>{
+function startDraw(){
   const p=choose(); if(!p)return;
   $("#drawBtn").disabled=true; $("#result").classList.remove("show"); $("#machine").classList.add("spinning","cranking");
   $("#wheel").classList.remove("glow");
@@ -273,7 +273,10 @@ $("#drawBtn").onclick=()=>{
     $("#tier").textContent=p.tier;$("#prize").textContent=p.name;$("#result").classList.add("show");fireworks();
     if(navigator.vibrate)navigator.vibrate([50,40,100]);
   },6100);
-};
+}
+$("#drawBtn").onclick=startDraw;
+$("#centerCrank").onclick=startDraw;
+$("#centerCrank").onkeydown=(e)=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();startDraw()}};
 $("#next").onclick=()=>{$("#result").classList.remove("show");$("#wheel").classList.remove("glow");$("#prizeBall").classList.remove("drop");$("#prizeBall").style.opacity=0;update()}
 function openP(id){closePanels();$(id).classList.add("open")}function closePanels(){document.querySelectorAll(".panel").forEach(x=>x.classList.remove("open"))}window.closePanels=closePanels;
 $("#settingsBtn").onclick=()=>{renderEditor();openP("#settingsPanel")};$("#historyBtn").onclick=()=>{renderHistory();openP("#historyPanel")}
@@ -290,22 +293,7 @@ $("#clear").onclick=()=>{if(confirm("確定清除所有紀錄？")){history=[];s
 $("#reset").onclick=()=>{if(confirm("恢復預設獎項並清除紀錄？")){prizes=structuredClone(DEFAULTS);history=[];saveData();renderEditor();renderHistory();update()}}
 document.querySelectorAll(".panel").forEach(x=>x.onclick=e=>{if(e.target===x)closePanels()});update();renderHistory();
 
-// V7.6: the entire center handle starts the same draw action.
-// No network access is required; this simply reuses the existing local draw button.
-const centerCrankEl=document.getElementById("centerCrank");
-const drawButtonEl=document.getElementById("drawBtn");
-if(centerCrankEl && drawButtonEl){
-  const startDrawFromHandle=()=>{
-    if(!drawButtonEl.disabled) drawButtonEl.click();
-  };
-  centerCrankEl.addEventListener("click",startDrawFromHandle);
-  centerCrankEl.addEventListener("keydown",(e)=>{
-    if(e.key==="Enter"||e.key===" "){
-      e.preventDefault();
-      startDrawFromHandle();
-    }
-  });
-}
+
 
 </script>
 <script>
