@@ -43,6 +43,10 @@ h1{font-size:clamp(2.05rem,7vw,4.4rem);margin:6px 0 0;text-shadow:0 5px 0 #08152
 #e84a45 180deg 202.5deg,#fff4de 202.5deg 225deg,#e84a45 225deg 247.5deg,#fff4de 247.5deg 270deg,
 #e84a45 270deg 292.5deg,#fff4de 292.5deg 315deg,#e84a45 315deg 337.5deg,#fff4de 337.5deg 360deg)}
 .wheel:after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 0 4px #00000018,inset 0 0 30px #0002;pointer-events:none}
+
+.wheelFrame:before{content:"🌕";position:absolute;left:50%;top:-30px;transform:translateX(-50%);width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#ffe38a;border:6px solid #70462e;box-shadow:0 5px 0 #0002;font-size:1.8rem;z-index:10}
+.hub{background:#fff1c7;color:#5c3b2d;font-size:2.35rem;border-color:#e8b965}
+
 .hub{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:82px;height:82px;border-radius:50%;display:grid;place-items:center;background:#233a75;border:8px solid #f5d28a;color:#fff;font-size:1.9rem;font-weight:1000;z-index:6;box-shadow:0 5px 0 #0003}
 .chute{position:absolute;left:50%;top:326px;transform:translateX(-50%);width:92px;height:58px;background:#8c5738;border:6px solid #553728;border-radius:0 0 22px 22px;z-index:8;box-shadow:0 5px 0 #0002}
 .chute:before{content:"";position:absolute;left:50%;top:-12px;transform:translateX(-50%);width:58px;height:24px;background:#1b1630;border:5px solid #5d3c2e;border-radius:50%}
@@ -76,14 +80,14 @@ table{width:100%;border-collapse:collapse}th,td{padding:8px;border-bottom:1px so
 <header><div class="logo">🌕 お月見まつり</div><div class="tools"><button class="tool" id="historyBtn">📋 紀錄</button><button class="tool" id="settingsBtn">⚙️ 設定</button></div></header>
 <main>
 <div class="lanterns"><div class="lantern"></div><div class="lantern"></div><div class="lantern"></div><div class="lantern"></div></div>
-<h1>福引き抽選会</h1><div style="font-size:.72rem;opacity:.55">V5</div><div class="sub">中秋月見祭・福引轉輪</div>
+<h1>福引き抽選会</h1><div class="sub">中秋月見祭・福引轉輪</div>
 <section class="game">
 <div class="machineBox">
   <div class="machine" id="machine">
     <div class="wheelFrame">
       <div class="wheel" id="wheel">
       </div>
-      <div class="hub">福</div>
+      <div class="hub" aria-label="月兔">🐰</div>
     </div>
     <div class="chute"></div><div class="ballTray"></div><div class="prizeBall" id="prizeBall"></div>
     <div class="stand"></div><div class="base"></div>
