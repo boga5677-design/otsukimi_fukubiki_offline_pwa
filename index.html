@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="月見福引">
 <link rel="manifest" href="manifest.webmanifest">
-<title>お月見まつり｜福引轉輪 V7.4</title>
+<title>お月見まつり｜福引轉輪 V7.5</title>
 <style>
 :root{
   --night:#0d2450;--night2:#081936;--cream:#fff6dc;--red:#e84a45;--red2:#b83131;
@@ -55,21 +55,10 @@ h1{font-size:clamp(2.05rem,7vw,4.4rem);margin:6px 0 0;text-shadow:0 5px 0 #08152
 @keyframes ballDrop{0%{opacity:0;transform:translateY(-12px) scale(.72)}12%{opacity:1;transform:translateY(0) scale(1)}55%{transform:translateY(58px) rotate(120deg)}72%{transform:translateY(72px) rotate(190deg)}84%{transform:translateY(66px) rotate(230deg)}92%{transform:translateY(72px) rotate(260deg)}100%{opacity:1;transform:translateY(74px) rotate(280deg)}}
 
 
-/* V7 micro-adjustments only */
-
-/* V7.2 responsive sizing */
+/* V7.5 micro-adjustments — clean replacement */
 .machineBox{height:510px}
-@media(max-width:520px){
-  .machineBox{height:455px}
-  .machine{transform:scale(.78)}
-}
-@media(min-width:521px) and (max-width:849px){
-  .machine{transform:scale(.86)}
-}
-@media(min-width:1100px){
-  .machine{transform:scale(.94)}
-}
-
+.machine{width:430px;height:485px;position:relative;transform:scale(.92);transform-origin:center center}
+.base{width:380px}
 .chute{display:none}
 .ballTray{
   position:absolute;left:50%;top:388px;transform:translateX(-50%);
@@ -79,48 +68,47 @@ h1{font-size:clamp(2.05rem,7vw,4.4rem);margin:6px 0 0;text-shadow:0 5px 0 #08152
 .centerCrank{
   position:absolute;left:50%;top:50%;width:105px;height:20px;
   margin-left:-3px;margin-top:-10px;transform-origin:3px 10px;
-  background:#8d5838;border:5px solid #553728;border-radius:12px;
-  z-index:14
+  background:#8d5838;border:5px solid #553728;border-radius:12px;z-index:14
 }
 .centerCrank span{
   position:absolute;right:-24px;top:-11px;width:28px;height:32px;
   background:#d79a56;border:5px solid #553728;border-radius:10px
 }
-.machine.cranking .centerCrank{animation:centerCrankTurn .75s ease-in-out 1}
-@keyframes centerCrankTurn{to{transform:rotate(360deg)}}
+.machine.cranking .centerCrank{animation:centerCrankTurn .72s ease-in-out 1}
+@keyframes centerCrankTurn{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
 .prizeBall{
-  left:50%;top:318px;margin:-25px 0 0 -25px;
+  left:50%;top:318px;margin:-25px 0 0 -25px
 }
-.prizeBall.drop{animation:ballTangentDrop 1.55s linear forwards}
+.prizeBall.drop{
+  animation:ballTangentDrop 1.22s linear forwards
+}
+/* Fast tangent launch -> gravity -> floor bounce -> keep rolling left.
+   X never reverses direction. */
 @keyframes ballTangentDrop{
-  0%{opacity:1;transform:translate(-118px,2px) rotate(0deg)}
-  7%{opacity:1;transform:translate(-151px,17px) rotate(-48deg)}
-  14%{opacity:1;transform:translate(-181px,36px) rotate(-96deg)}
-  23%{opacity:1;transform:translate(-205px,65px) rotate(-146deg)}
-  34%{opacity:1;transform:translate(-222px,105px) rotate(-202deg)}
-  45%{opacity:1;transform:translate(-234px,151px) rotate(-258deg)}
-  52%{opacity:1;transform:translate(-238px,174px) rotate(-294deg)}
-  58%{opacity:1;transform:translate(-245px,160px) rotate(-326deg)}
-  67%{opacity:1;transform:translate(-260px,173px) rotate(-372deg)}
-  82%{opacity:1;transform:translate(-284px,174px) rotate(-424deg)}
-  100%{opacity:1;transform:translate(-312px,174px) rotate(-486deg)}
+  0%  {opacity:1;transform:translate(-118px,2px) rotate(0deg)}
+  6%  {opacity:1;transform:translate(-154px,17px) rotate(-52deg)}
+  12% {opacity:1;transform:translate(-184px,36px) rotate(-102deg)}
+  20% {opacity:1;transform:translate(-207px,63px) rotate(-150deg)}
+  31% {opacity:1;transform:translate(-224px,101px) rotate(-205deg)}
+  43% {opacity:1;transform:translate(-236px,148px) rotate(-262deg)}
+  51% {opacity:1;transform:translate(-241px,174px) rotate(-300deg)}
+  57% {opacity:1;transform:translate(-249px,159px) rotate(-330deg)}
+  66% {opacity:1;transform:translate(-264px,173px) rotate(-378deg)}
+  82% {opacity:1;transform:translate(-291px,174px) rotate(-438deg)}
+  100%{opacity:1;transform:translate(-322px,174px) rotate(-505deg)}
 }
-  14%{opacity:1;transform:translate(-143px,14px) rotate(-38deg)}
-  28%{opacity:1;transform:translate(-168px,29px) rotate(-78deg)}
-  42%{opacity:1;transform:translate(-190px,52px) rotate(-122deg)}
-  56%{opacity:1;transform:translate(-209px,84px) rotate(-172deg)}
-  68%{opacity:1;transform:translate(-224px,124px) rotate(-226deg)}
-  76%{opacity:1;transform:translate(-232px,157px) rotate(-268deg)}
-  81%{opacity:1;transform:translate(-236px,174px) rotate(-294deg)}
-  85%{opacity:1;transform:translate(-242px,160px) rotate(-322deg)}
-  90%{opacity:1;transform:translate(-258px,173px) rotate(-365deg)}
-  95%{opacity:1;transform:translate(-280px,174px) rotate(-415deg)}
-  100%{opacity:1;transform:translate(-303px,174px) rotate(-468deg)}
+@media(max-width:520px){
+  .machineBox{height:455px}
+  .machine{transform:scale(.78)}
 }
-  28%{opacity:1;transform:translate(-165px,24px) rotate(-70deg)}
-  55%{opacity:1;transform:translate(-190px,55px) rotate(-140deg)}
-  78%{opacity:1;transform:translate(-198px,92px) rotate(-205deg)}
-  100%{opacity:1;transform:translate(-201px,132px) rotate(-270deg)}
+@media(min-width:521px) and (max-width:849px){
+  .machine{transform:scale(.86)}
+}
+@media(min-width:1100px){
+  .machine{transform:scale(.94)}
 }
 
 .controls{text-align:center}
@@ -283,7 +271,7 @@ $("#drawBtn").onclick=()=>{
     $("#machine").classList.remove("cranking");p.qty--;history.unshift({time:new Date().toLocaleString("zh-TW"),tier:p.tier,name:p.name,color:p.color});saveData();renderHistory();update();
     $("#tier").textContent=p.tier;$("#prize").textContent=p.name;$("#result").classList.add("show");fireworks();
     if(navigator.vibrate)navigator.vibrate([50,40,100]);
-  },5850);
+  },6100);
 };
 $("#next").onclick=()=>{$("#result").classList.remove("show");$("#wheel").classList.remove("glow");$("#prizeBall").classList.remove("drop");$("#prizeBall").style.opacity=0;update()}
 function openP(id){closePanels();$(id).classList.add("open")}function closePanels(){document.querySelectorAll(".panel").forEach(x=>x.classList.remove("open"))}window.closePanels=closePanels;
