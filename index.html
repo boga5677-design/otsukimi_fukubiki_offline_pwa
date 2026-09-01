@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="月見福引">
 <link rel="manifest" href="manifest.webmanifest">
-<title>お月見まつり｜福引轉輪 V7.6</title>
+<title>お月見まつり｜福引轉輪 V7.7</title>
 <style>
 :root{
   --night:#0d2450;--night2:#081936;--cream:#fff6dc;--red:#e84a45;--red2:#b83131;
@@ -293,14 +293,16 @@ document.querySelectorAll(".panel").forEach(x=>x.onclick=e=>{if(e.target===x)clo
 // V7.6: the entire center handle starts the same draw action.
 // No network access is required; this simply reuses the existing local draw button.
 const centerCrankEl=document.getElementById("centerCrank");
-if(centerCrankEl){
-  centerCrankEl.addEventListener("click",()=>{
-    if(!drawBtn.disabled) drawBtn.click();
-  });
+const drawButtonEl=document.getElementById("drawBtn");
+if(centerCrankEl && drawButtonEl){
+  const startDrawFromHandle=()=>{
+    if(!drawButtonEl.disabled) drawButtonEl.click();
+  };
+  centerCrankEl.addEventListener("click",startDrawFromHandle);
   centerCrankEl.addEventListener("keydown",(e)=>{
-    if((e.key==="Enter"||e.key===" ")&&!drawBtn.disabled){
+    if(e.key==="Enter"||e.key===" "){
       e.preventDefault();
-      drawBtn.click();
+      startDrawFromHandle();
     }
   });
 }
