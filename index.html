@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="月見福引">
 <link rel="manifest" href="manifest.webmanifest">
-<title>お月見まつり｜福引轉輪 V7</title>
+<title>お月見まつり｜福引轉輪 V7.4</title>
 <style>
 :root{
   --night:#0d2450;--night2:#081936;--cream:#fff6dc;--red:#e84a45;--red2:#b83131;
@@ -32,13 +32,11 @@ h1{font-size:clamp(2.05rem,7vw,4.4rem);margin:6px 0 0;text-shadow:0 5px 0 #08152
 .sub{color:#ffe59a;font-weight:900}
 .game{display:grid;grid-template-columns:1fr;align-items:center;gap:10px}
 .machineBox{height:520px;display:grid;place-items:center}
-.machine{width:430px;height:485px;max-width:94vw;position:relative}
+.machine{width:430px;height:485px;position:relative;transform:scale(.92);transform-origin:center center}
 .stand{position:absolute;left:50%;bottom:45px;transform:translateX(-50%);width:260px;height:180px;background:linear-gradient(#d59b61,#b86e3b);border:7px solid var(--woodDark);clip-path:polygon(28% 0,72% 0,100% 100%,0 100%);z-index:1}
 .stand:after{content:"";position:absolute;left:50%;top:58px;transform:translateX(-50%);width:90px;height:72px;background:#e9b97c;border:5px solid #805237;clip-path:polygon(18% 0,82% 0,100% 100%,0 100%)}
-.base{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:320px;height:72px;border-radius:12px;background:linear-gradient(#9e6137,#70432a);border:7px solid #4f3327;box-shadow:0 10px 0 #0003}
+.base{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:380px;height:72px;border-radius:12px;background:linear-gradient(#9e6137,#70432a);border:7px solid #4f3327;box-shadow:0 10px 0 #0003}
 .wheelFrame{position:absolute;left:50%;top:20px;width:318px;height:318px;transform:translateX(-50%);border-radius:50%;background:#e9b96e;border:9px solid #5c3b2d;box-shadow:0 12px 0 #0003;z-index:4}
-.wheelFrame .crest{position:absolute;left:50%;top:-22px;transform:translateX(-50%);width:76px;height:38px;background:#d79a56;border:6px solid #5c3b2d;border-radius:50% 50% 12px 12px;z-index:9;box-shadow:0 4px 0 #0002}
-.wheelFrame .crest:before{content:"月";position:absolute;inset:0;display:grid;place-items:center;color:#fff4cf;font-weight:1000;font-size:1.15rem}
 .wheel{position:absolute;inset:13px;border-radius:50%;overflow:hidden;border:7px solid #fff0c7;transform:rotate(0deg);will-change:transform;background:conic-gradient(
 #e84a45 0 22.5deg,#fff4de 22.5deg 45deg,#e84a45 45deg 67.5deg,#fff4de 67.5deg 90deg,
 #e84a45 90deg 112.5deg,#fff4de 112.5deg 135deg,#e84a45 135deg 157.5deg,#fff4de 157.5deg 180deg,
@@ -47,7 +45,7 @@ h1{font-size:clamp(2.05rem,7vw,4.4rem);margin:6px 0 0;text-shadow:0 5px 0 #08152
 .wheel:after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 0 4px #00000018,inset 0 0 30px #0002;pointer-events:none}
 
 
-.hub{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:88px;height:88px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 38% 32%,#fff9dc 0 12%,#ffe7a0 13% 58%,#e7b95f 59% 100%);border:7px solid #70462e;color:#5c3b2d;font-size:2.45rem;font-weight:1000;z-index:6;box-shadow:0 5px 0 #0003,inset 0 0 0 4px #fff4c4}
+.hub{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:88px;height:88px;border-radius:50%;display:grid;place-items:center;background:#e7b95f;border:7px solid #70462e;z-index:12;box-shadow:0 5px 0 #0003,inset 0 0 0 4px #fff4c4}
 .chute{position:absolute;left:50%;top:326px;transform:translateX(-50%);width:92px;height:58px;background:#8c5738;border:6px solid #553728;border-radius:0 0 22px 22px;z-index:8;box-shadow:0 5px 0 #0002}
 .chute:before{content:"";position:absolute;left:50%;top:-12px;transform:translateX(-50%);width:58px;height:24px;background:#1b1630;border:5px solid #5d3c2e;border-radius:50%}
 .ballTray{position:absolute;left:50%;top:405px;transform:translateX(-50%);width:132px;height:38px;background:#d7a367;border:6px solid #654331;border-radius:50%;z-index:7}
@@ -55,6 +53,75 @@ h1{font-size:clamp(2.05rem,7vw,4.4rem);margin:6px 0 0;text-shadow:0 5px 0 #08152
 .prizeBall:after{content:"";position:absolute;width:13px;height:9px;border-radius:50%;background:#fff;opacity:.72;left:9px;top:8px;transform:rotate(-25deg)}
 .prizeBall.drop{animation:ballDrop 1.05s cubic-bezier(.2,.7,.25,1) forwards}
 @keyframes ballDrop{0%{opacity:0;transform:translateY(-12px) scale(.72)}12%{opacity:1;transform:translateY(0) scale(1)}55%{transform:translateY(58px) rotate(120deg)}72%{transform:translateY(72px) rotate(190deg)}84%{transform:translateY(66px) rotate(230deg)}92%{transform:translateY(72px) rotate(260deg)}100%{opacity:1;transform:translateY(74px) rotate(280deg)}}
+
+
+/* V7 micro-adjustments only */
+
+/* V7.2 responsive sizing */
+.machineBox{height:510px}
+@media(max-width:520px){
+  .machineBox{height:455px}
+  .machine{transform:scale(.78)}
+}
+@media(min-width:521px) and (max-width:849px){
+  .machine{transform:scale(.86)}
+}
+@media(min-width:1100px){
+  .machine{transform:scale(.94)}
+}
+
+.chute{display:none}
+.ballTray{
+  position:absolute;left:50%;top:388px;transform:translateX(-50%);
+  width:194px;height:34px;background:#d7a367;border:6px solid #654331;
+  border-radius:12px;z-index:7;box-shadow:0 4px 0 #0002
+}
+.centerCrank{
+  position:absolute;left:50%;top:50%;width:105px;height:20px;
+  margin-left:-3px;margin-top:-10px;transform-origin:3px 10px;
+  background:#8d5838;border:5px solid #553728;border-radius:12px;
+  z-index:14
+}
+.centerCrank span{
+  position:absolute;right:-24px;top:-11px;width:28px;height:32px;
+  background:#d79a56;border:5px solid #553728;border-radius:10px
+}
+.machine.cranking .centerCrank{animation:centerCrankTurn .75s ease-in-out 1}
+@keyframes centerCrankTurn{to{transform:rotate(360deg)}}
+.prizeBall{
+  left:50%;top:318px;margin:-25px 0 0 -25px;
+}
+.prizeBall.drop{animation:ballTangentDrop 1.55s linear forwards}
+@keyframes ballTangentDrop{
+  0%{opacity:1;transform:translate(-118px,2px) rotate(0deg)}
+  7%{opacity:1;transform:translate(-151px,17px) rotate(-48deg)}
+  14%{opacity:1;transform:translate(-181px,36px) rotate(-96deg)}
+  23%{opacity:1;transform:translate(-205px,65px) rotate(-146deg)}
+  34%{opacity:1;transform:translate(-222px,105px) rotate(-202deg)}
+  45%{opacity:1;transform:translate(-234px,151px) rotate(-258deg)}
+  52%{opacity:1;transform:translate(-238px,174px) rotate(-294deg)}
+  58%{opacity:1;transform:translate(-245px,160px) rotate(-326deg)}
+  67%{opacity:1;transform:translate(-260px,173px) rotate(-372deg)}
+  82%{opacity:1;transform:translate(-284px,174px) rotate(-424deg)}
+  100%{opacity:1;transform:translate(-312px,174px) rotate(-486deg)}
+}
+  14%{opacity:1;transform:translate(-143px,14px) rotate(-38deg)}
+  28%{opacity:1;transform:translate(-168px,29px) rotate(-78deg)}
+  42%{opacity:1;transform:translate(-190px,52px) rotate(-122deg)}
+  56%{opacity:1;transform:translate(-209px,84px) rotate(-172deg)}
+  68%{opacity:1;transform:translate(-224px,124px) rotate(-226deg)}
+  76%{opacity:1;transform:translate(-232px,157px) rotate(-268deg)}
+  81%{opacity:1;transform:translate(-236px,174px) rotate(-294deg)}
+  85%{opacity:1;transform:translate(-242px,160px) rotate(-322deg)}
+  90%{opacity:1;transform:translate(-258px,173px) rotate(-365deg)}
+  95%{opacity:1;transform:translate(-280px,174px) rotate(-415deg)}
+  100%{opacity:1;transform:translate(-303px,174px) rotate(-468deg)}
+}
+  28%{opacity:1;transform:translate(-165px,24px) rotate(-70deg)}
+  55%{opacity:1;transform:translate(-190px,55px) rotate(-140deg)}
+  78%{opacity:1;transform:translate(-198px,92px) rotate(-205deg)}
+  100%{opacity:1;transform:translate(-201px,132px) rotate(-270deg)}
+}
 
 .controls{text-align:center}
 .draw{min-width:275px;border:5px solid #744321;border-radius:28px;background:#ffd75b;color:#543600;padding:16px 30px;font-size:clamp(1.35rem,4vw,1.95rem);font-weight:1000;box-shadow:0 8px 0 #b87229;cursor:pointer}
@@ -85,10 +152,9 @@ table{width:100%;border-collapse:collapse}th,td{padding:8px;border-bottom:1px so
 <div class="machineBox">
   <div class="machine" id="machine">
     <div class="wheelFrame">
-      <div class="crest" aria-hidden="true"></div>
       <div class="wheel" id="wheel">
       </div>
-      <div class="hub" aria-label="月兔"><span style="font-size:2.2rem;line-height:1">月</span></div>
+      <div class="hub" aria-hidden="true"></div><div class="centerCrank" id="centerCrank" aria-hidden="true"><span></span></div>
     </div>
     <div class="chute"></div><div class="ballTray"></div><div class="prizeBall" id="prizeBall"></div>
     <div class="stand"></div><div class="base"></div>
@@ -201,7 +267,7 @@ function fireworks(){
 }
 $("#drawBtn").onclick=()=>{
   const p=choose(); if(!p)return;
-  $("#drawBtn").disabled=true; $("#result").classList.remove("show"); $("#machine").classList.add("spinning");
+  $("#drawBtn").disabled=true; $("#result").classList.remove("show"); $("#machine").classList.add("spinning","cranking");
   $("#wheel").classList.remove("glow");
   const ball=$("#prizeBall"); ball.classList.remove("drop"); ball.style.opacity=0; ball.style.background=p.color||"#ffd54f";
   const extraTurns=6+Math.floor(Math.random()*3);
@@ -214,7 +280,7 @@ $("#drawBtn").onclick=()=>{
     ball.classList.add("drop");
   },4700);
   setTimeout(()=>{
-    p.qty--;history.unshift({time:new Date().toLocaleString("zh-TW"),tier:p.tier,name:p.name,color:p.color});saveData();renderHistory();update();
+    $("#machine").classList.remove("cranking");p.qty--;history.unshift({time:new Date().toLocaleString("zh-TW"),tier:p.tier,name:p.name,color:p.color});saveData();renderHistory();update();
     $("#tier").textContent=p.tier;$("#prize").textContent=p.name;$("#result").classList.add("show");fireworks();
     if(navigator.vibrate)navigator.vibrate([50,40,100]);
   },5850);
