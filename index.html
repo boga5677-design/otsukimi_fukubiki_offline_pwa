@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="月見福引">
 <link rel="manifest" href="manifest.webmanifest">
-<title>お月見まつり｜福引轉輪</title>
+<title>お月見まつり｜福引轉輪 V7</title>
 <style>
 :root{
   --night:#0d2450;--night2:#081936;--cream:#fff6dc;--red:#e84a45;--red2:#b83131;
@@ -37,6 +37,8 @@ h1{font-size:clamp(2.05rem,7vw,4.4rem);margin:6px 0 0;text-shadow:0 5px 0 #08152
 .stand:after{content:"";position:absolute;left:50%;top:58px;transform:translateX(-50%);width:90px;height:72px;background:#e9b97c;border:5px solid #805237;clip-path:polygon(18% 0,82% 0,100% 100%,0 100%)}
 .base{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:320px;height:72px;border-radius:12px;background:linear-gradient(#9e6137,#70432a);border:7px solid #4f3327;box-shadow:0 10px 0 #0003}
 .wheelFrame{position:absolute;left:50%;top:20px;width:318px;height:318px;transform:translateX(-50%);border-radius:50%;background:#e9b96e;border:9px solid #5c3b2d;box-shadow:0 12px 0 #0003;z-index:4}
+.wheelFrame .crest{position:absolute;left:50%;top:-22px;transform:translateX(-50%);width:76px;height:38px;background:#d79a56;border:6px solid #5c3b2d;border-radius:50% 50% 12px 12px;z-index:9;box-shadow:0 4px 0 #0002}
+.wheelFrame .crest:before{content:"月";position:absolute;inset:0;display:grid;place-items:center;color:#fff4cf;font-weight:1000;font-size:1.15rem}
 .wheel{position:absolute;inset:13px;border-radius:50%;overflow:hidden;border:7px solid #fff0c7;transform:rotate(0deg);will-change:transform;background:conic-gradient(
 #e84a45 0 22.5deg,#fff4de 22.5deg 45deg,#e84a45 45deg 67.5deg,#fff4de 67.5deg 90deg,
 #e84a45 90deg 112.5deg,#fff4de 112.5deg 135deg,#e84a45 135deg 157.5deg,#fff4de 157.5deg 180deg,
@@ -44,10 +46,8 @@ h1{font-size:clamp(2.05rem,7vw,4.4rem);margin:6px 0 0;text-shadow:0 5px 0 #08152
 #e84a45 270deg 292.5deg,#fff4de 292.5deg 315deg,#e84a45 315deg 337.5deg,#fff4de 337.5deg 360deg)}
 .wheel:after{content:"";position:absolute;inset:0;border-radius:50%;box-shadow:inset 0 0 0 4px #00000018,inset 0 0 30px #0002;pointer-events:none}
 
-.wheelFrame:before{content:"🌕";position:absolute;left:50%;top:-30px;transform:translateX(-50%);width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#ffe38a;border:6px solid #70462e;box-shadow:0 5px 0 #0002;font-size:1.8rem;z-index:10}
-.hub{background:#fff1c7;color:#5c3b2d;font-size:2.35rem;border-color:#e8b965}
 
-.hub{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:82px;height:82px;border-radius:50%;display:grid;place-items:center;background:#233a75;border:8px solid #f5d28a;color:#fff;font-size:1.9rem;font-weight:1000;z-index:6;box-shadow:0 5px 0 #0003}
+.hub{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:88px;height:88px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 38% 32%,#fff9dc 0 12%,#ffe7a0 13% 58%,#e7b95f 59% 100%);border:7px solid #70462e;color:#5c3b2d;font-size:2.45rem;font-weight:1000;z-index:6;box-shadow:0 5px 0 #0003,inset 0 0 0 4px #fff4c4}
 .chute{position:absolute;left:50%;top:326px;transform:translateX(-50%);width:92px;height:58px;background:#8c5738;border:6px solid #553728;border-radius:0 0 22px 22px;z-index:8;box-shadow:0 5px 0 #0002}
 .chute:before{content:"";position:absolute;left:50%;top:-12px;transform:translateX(-50%);width:58px;height:24px;background:#1b1630;border:5px solid #5d3c2e;border-radius:50%}
 .ballTray{position:absolute;left:50%;top:405px;transform:translateX(-50%);width:132px;height:38px;background:#d7a367;border:6px solid #654331;border-radius:50%;z-index:7}
@@ -85,9 +85,10 @@ table{width:100%;border-collapse:collapse}th,td{padding:8px;border-bottom:1px so
 <div class="machineBox">
   <div class="machine" id="machine">
     <div class="wheelFrame">
+      <div class="crest" aria-hidden="true"></div>
       <div class="wheel" id="wheel">
       </div>
-      <div class="hub" aria-label="月兔">🐰</div>
+      <div class="hub" aria-label="月兔"><span style="font-size:2.2rem;line-height:1">月</span></div>
     </div>
     <div class="chute"></div><div class="ballTray"></div><div class="prizeBall" id="prizeBall"></div>
     <div class="stand"></div><div class="base"></div>
