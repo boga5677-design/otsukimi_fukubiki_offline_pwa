@@ -1,4 +1,4 @@
-const CACHE = "otsukimi-fukubiki-v8-0";
+const CACHE = "otsukimi-fukubiki-v8-1-cn-name";
 const ASSETS = ["./", "./index.html", "./manifest.webmanifest"];
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)));

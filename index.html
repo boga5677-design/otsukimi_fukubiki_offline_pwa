@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="月見福引">
 <link rel="manifest" href="manifest.webmanifest">
-<title>お月見まつり｜福引轉輪 V8.0</title>
+<title>中秋月見祭｜福引轉輪 V8.1</title>
 <style>
 :root{
   --night:#0d2450;--night2:#081936;--cream:#fff6dc;--red:#e84a45;--red2:#b83131;
@@ -134,10 +134,10 @@ table{width:100%;border-collapse:collapse}th,td{padding:8px;border-bottom:1px so
 </style>
 </head>
 <body>
-<header><div class="logo">🌕 お月見まつり</div><div class="tools"><button class="tool" id="historyBtn">📋 紀錄</button><button class="tool" id="settingsBtn">⚙️ 設定</button></div></header>
+<header><div class="logo">🌕 中秋月見祭</div><div class="tools"><button class="tool" id="historyBtn">📋 紀錄</button><button class="tool" id="settingsBtn">⚙️ 設定</button></div></header>
 <main>
 <div class="lanterns"><div class="lantern"></div><div class="lantern"></div><div class="lantern"></div><div class="lantern"></div></div>
-<h1>福引き抽選会</h1><div class="sub">中秋月見祭・福引轉輪</div>
+<h1>福引抽獎會</h1><div class="sub">中秋月見祭｜福引轉輪</div>
 <section class="game">
 <div class="machineBox">
   <div class="machine" id="machine">
@@ -153,9 +153,9 @@ table{width:100%;border-collapse:collapse}th,td{padding:8px;border-bottom:1px so
 <div class="controls">
 <div class="playerBox"><div class="modeSwitch"><button class="modeBtn active" id="modeFree" type="button">🎡 不選姓名</button><button class="modeBtn" id="modeName" type="button">👤 選姓名</button></div>
 <div class="namePicker" id="namePicker" hidden><label for="playerSelect">本次抽獎者</label><select id="playerSelect"><option value="">請選擇姓名</option></select></div></div>
-<button class="draw" id="drawBtn">🎡 まわす！<br>轉一轉！</button>
+<button class="draw" id="drawBtn">🎡 轉一轉！</button>
 <div class="hint" id="hint"></div>
-<div class="result" id="result"><div style="font-size:2rem">🎆 🌕 🎆</div><h2>大当たり！</h2><div class="resultPlayer" id="resultPlayer"></div><div class="tier" id="tier"></div><div class="prize" id="prize"></div><div style="margin-top:13px"><button class="btn primary" id="next">下一位 👧👦</button></div></div>
+<div class="result" id="result"><div style="font-size:2rem">🎆 🌕 🎆</div><h2>恭喜中獎！</h2><div class="resultPlayer" id="resultPlayer"></div><div class="tier" id="tier"></div><div class="prize" id="prize"></div><div style="margin-top:13px"><button class="btn primary" id="next">下一位 👧👦</button></div></div>
 </div>
 </section>
 </main>
@@ -169,14 +169,14 @@ const DEFAULTS=[
 {tier:"🥇 一等賞",name:"🚗 小汽車／玩具",qty:2,weight:2,color:"#f28b2e"},
 {tier:"🥈 二等賞",name:"🫧 泡泡玩具",qty:3,weight:4,color:"#f7c43b"},
 {tier:"🥉 三等賞",name:"📚 水畫冊／貼紙書",qty:4,weight:6,color:"#67b84f"},
-{tier:"🍭 お菓子賞",name:"🍪 小朋友零食包",qty:6,weight:10,color:"#4f8fe8"},
-{tier:"🌟 わくわく賞",name:"⭐ 可愛貼紙",qty:8,weight:14,color:"#9b66d9"}
+{tier:"🍭 零食賞",name:"🍪 小朋友零食包",qty:6,weight:10,color:"#4f8fe8"},
+{tier:"🌟 驚喜賞",name:"⭐ 可愛貼紙",qty:8,weight:14,color:"#9b66d9"}
 ];
 let prizes=JSON.parse(localStorage.getItem("wheelPrizes")||"null")||structuredClone(DEFAULTS);
 let history=JSON.parse(localStorage.getItem("wheelHistory")||"[]");
 let currentRotation=0;
 const FALLBACK_COLORS=["#e84a45","#f28b2e","#f7c43b","#67b84f","#4f8fe8","#9b66d9","#ef7da7"];
-prizes.forEach((p,i)=>{if(!p.color)p.color=FALLBACK_COLORS[i%FALLBACK_COLORS.length]});
+prizes.forEach((p,i)=>{if(!p.color)p.color=FALLBACK_COLORS[i%FALLBACK_COLORS.length];if(p.tier==="🍭 \u304a\u83d3\u5b50\u8cde")p.tier="🍭 零食賞";if(p.tier==="🌟 \u308f\u304f\u308f\u304f\u8cde")p.tier="🌟 驚喜賞"});
 const $=s=>document.querySelector(s);
 const NAME_KEY="fukubiki_names_v1",MODE_KEY="fukubiki_name_mode_v1";let drawMode=localStorage.getItem(MODE_KEY)==="name"?"name":"free";let participantNames=[];try{participantNames=JSON.parse(localStorage.getItem(NAME_KEY)||"[]")}catch(e){}if(!Array.isArray(participantNames))participantNames=[];const htmlEsc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));function refreshNameUI(){const sel=$("#playerSelect"),old=sel.value;$("#modeFree").classList.toggle("active",drawMode==="free");$("#modeName").classList.toggle("active",drawMode==="name");$("#namePicker").hidden=drawMode!=="name";sel.innerHTML='<option value="">請選擇姓名</option>'+participantNames.map((n,i)=>`<option value="${i}">${htmlEsc(n)}</option>`).join("");if([...sel.options].some(o=>o.value===old))sel.value=old;}function selectedPlayerName(){if(drawMode!=="name")return "";const i=Number($("#playerSelect").value);return Number.isInteger(i)&&participantNames[i]?participantNames[i]:"";}
 
@@ -259,7 +259,7 @@ function fireworks(){
   }
   requestAnimationFrame(frame);
 }
-function startDraw(){const playerName=selectedPlayerName();if(drawMode==="name"&&!playerName){$("#hint").textContent="👤 請先選擇本次抽獎者";$("#playerSelect").focus();return;}
+function startDraw(){if($("#drawBtn").disabled)return;const playerName=selectedPlayerName();if(drawMode==="name"&&!playerName){$("#hint").textContent="👤 請先選擇本次抽獎者";$("#playerSelect").focus();return;}
   const p=choose(); if(!p)return;
   $("#drawBtn").disabled=true; $("#result").classList.remove("show"); $("#machine").classList.add("spinning","cranking");
   $("#wheel").classList.remove("glow");
