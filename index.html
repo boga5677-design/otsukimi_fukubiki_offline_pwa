@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="月見福引">
 <link rel="manifest" href="manifest.webmanifest">
-<title>中秋月見祭｜福引轉輪 V8.1</title>
+<title>中秋月見祭｜福引轉輪 V8.2</title>
 <style>
 :root{
   --night:#0d2450;--night2:#081936;--cream:#fff6dc;--red:#e84a45;--red2:#b83131;
@@ -303,7 +303,12 @@ document.querySelectorAll(".panel").forEach(x=>x.onclick=e=>{if(e.target===x)clo
 </script>
 <script>
 if ("serviceWorker" in navigator && location.protocol !== "file:") {
-  window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+  window.addEventListener("load", async () => {
+  try{
+    const reg=await navigator.serviceWorker.register("./sw.js",{updateViaCache:"none"});
+    await reg.update();
+  }catch(e){}
+});
 }
 </script>
 </body>
