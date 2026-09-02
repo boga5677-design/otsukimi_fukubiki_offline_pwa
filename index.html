@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="月見福引">
 <link rel="manifest" href="manifest.webmanifest">
-<title>お月見まつり｜福引轉輪 V7.8</title>
+<title>お月見まつり｜福引轉輪 V8.0</title>
 <style>
 :root{
   --night:#0d2450;--night2:#081936;--cream:#fff6dc;--red:#e84a45;--red2:#b83131;
@@ -130,6 +130,7 @@ input{width:100%;padding:9px;border:3px solid #d3b17b;border-radius:11px}
 table{width:100%;border-collapse:collapse}th,td{padding:8px;border-bottom:1px solid #dcc7a5;text-align:left}
 @media(min-width:850px){.game{grid-template-columns:1.15fr .85fr}}
 @media(max-width:650px){.machineBox{height:500px}.row{grid-template-columns:1fr 1fr 65px 65px auto}.row input:nth-child(1),.row input:nth-child(2){grid-column:span 2}}
+.playerBox{max-width:420px;margin:0 auto 12px}.modeSwitch{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.modeBtn{border:3px solid #fff0c7;border-radius:15px;background:#ffffff18;color:#fff;padding:9px 13px;font-weight:1000;cursor:pointer}.modeBtn.active{background:#ffd75b;color:#543600;border-color:#744321}.namePicker{margin:10px auto 0;background:#fff6dc;color:#47323c;border:4px solid #d9a74f;border-radius:16px;padding:10px 12px;text-align:left}.namePicker label{display:block;font-weight:1000;margin-bottom:6px}.namePicker select{width:100%;font:inherit;font-weight:900;padding:10px;border:3px solid #d3b17b;border-radius:11px;background:#fff}.resultPlayer{font-size:1.25rem;font-weight:1000;color:#74512f;margin:4px 0 6px}.stats textarea{width:100%;padding:10px;border:3px solid #d3b17b;border-radius:11px;font:inherit;resize:vertical}
 </style>
 </head>
 <body>
@@ -150,15 +151,17 @@ table{width:100%;border-collapse:collapse}th,td{padding:8px;border-bottom:1px so
   </div>
 </div>
 <div class="controls">
+<div class="playerBox"><div class="modeSwitch"><button class="modeBtn active" id="modeFree" type="button">🎡 不選姓名</button><button class="modeBtn" id="modeName" type="button">👤 選姓名</button></div>
+<div class="namePicker" id="namePicker" hidden><label for="playerSelect">本次抽獎者</label><select id="playerSelect"><option value="">請選擇姓名</option></select></div></div>
 <button class="draw" id="drawBtn">🎡 まわす！<br>轉一轉！</button>
 <div class="hint" id="hint"></div>
-<div class="result" id="result"><div style="font-size:2rem">🎆 🌕 🎆</div><h2>大当たり！</h2><div class="tier" id="tier"></div><div class="prize" id="prize"></div><div style="margin-top:13px"><button class="btn primary" id="next">下一位 👧👦</button></div></div>
+<div class="result" id="result"><div style="font-size:2rem">🎆 🌕 🎆</div><h2>大当たり！</h2><div class="resultPlayer" id="resultPlayer"></div><div class="tier" id="tier"></div><div class="prize" id="prize"></div><div style="margin-top:13px"><button class="btn primary" id="next">下一位 👧👦</button></div></div>
 </div>
 </section>
 </main>
 
-<div class="panel" id="settingsPanel"><div class="sheet"><button class="btn close" onclick="closePanels()">✕</button><h2>⚙️ 家長設定</h2><p>獎項、獎品、數量與權重皆可編輯。</p><div id="editor"></div><div class="actions"><button class="btn primary" id="add">＋新增獎項</button><button class="btn" id="save">💾 儲存</button><button class="btn" id="backup">📦 匯出 JSON</button><label class="btn" style="background:#eee;cursor:pointer">📥 匯入 JSON<input id="import" type="file" accept=".json" style="display:none"></label><button class="btn danger" id="reset">♻️ 恢復預設</button></div></div></div>
-<div class="panel" id="historyPanel"><div class="sheet"><button class="btn close" onclick="closePanels()">✕</button><h2>📋 抽獎紀錄</h2><div class="stats" id="stats"></div><div style="overflow:auto;max-height:48vh"><table><thead><tr><th>#</th><th>時間</th><th>獎項</th><th>獎品</th></tr></thead><tbody id="tbody"></tbody></table></div><div class="actions"><button class="btn primary" id="csv">📤 匯出 CSV</button><button class="btn danger" id="clear">🗑️ 清除紀錄</button></div></div></div>
+<div class="panel" id="settingsPanel"><div class="sheet"><button class="btn close" onclick="closePanels()">✕</button><h2>⚙️ 家長設定</h2><p>獎項、獎品、數量與權重皆可編輯。</p><div class="stats"><b>👤 參加者姓名</b><p style="margin:6px 0">每行一個姓名。</p><textarea id="nameList" rows="6" placeholder="小明&#10;小華&#10;小美"></textarea><button class="btn primary" id="saveNames" type="button" style="margin-top:8px">💾 儲存姓名</button></div><div id="editor"></div><div class="actions"><button class="btn primary" id="add">＋新增獎項</button><button class="btn" id="save">💾 儲存</button><button class="btn" id="backup">📦 匯出 JSON</button><label class="btn" style="background:#eee;cursor:pointer">📥 匯入 JSON<input id="import" type="file" accept=".json" style="display:none"></label><button class="btn danger" id="reset">♻️ 恢復預設</button></div></div></div>
+<div class="panel" id="historyPanel"><div class="sheet"><button class="btn close" onclick="closePanels()">✕</button><h2>📋 抽獎紀錄</h2><div class="stats" id="stats"></div><div style="overflow:auto;max-height:48vh"><table><thead><tr><th>#</th><th>姓名</th><th>時間</th><th>獎項</th><th>獎品</th></tr></thead><tbody id="tbody"></tbody></table></div><div class="actions"><button class="btn primary" id="csv">📤 匯出 CSV</button><button class="btn danger" id="clear">🗑️ 清除紀錄</button></div></div></div>
 
 <script>
 const DEFAULTS=[
@@ -175,6 +178,8 @@ let currentRotation=0;
 const FALLBACK_COLORS=["#e84a45","#f28b2e","#f7c43b","#67b84f","#4f8fe8","#9b66d9","#ef7da7"];
 prizes.forEach((p,i)=>{if(!p.color)p.color=FALLBACK_COLORS[i%FALLBACK_COLORS.length]});
 const $=s=>document.querySelector(s);
+const NAME_KEY="fukubiki_names_v1",MODE_KEY="fukubiki_name_mode_v1";let drawMode=localStorage.getItem(MODE_KEY)==="name"?"name":"free";let participantNames=[];try{participantNames=JSON.parse(localStorage.getItem(NAME_KEY)||"[]")}catch(e){}if(!Array.isArray(participantNames))participantNames=[];const htmlEsc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));function refreshNameUI(){const sel=$("#playerSelect"),old=sel.value;$("#modeFree").classList.toggle("active",drawMode==="free");$("#modeName").classList.toggle("active",drawMode==="name");$("#namePicker").hidden=drawMode!=="name";sel.innerHTML='<option value="">請選擇姓名</option>'+participantNames.map((n,i)=>`<option value="${i}">${htmlEsc(n)}</option>`).join("");if([...sel.options].some(o=>o.value===old))sel.value=old;}function selectedPlayerName(){if(drawMode!=="name")return "";const i=Number($("#playerSelect").value);return Number.isInteger(i)&&participantNames[i]?participantNames[i]:"";}
+
 function saveData(){localStorage.setItem("wheelPrizes",JSON.stringify(prizes));localStorage.setItem("wheelHistory",JSON.stringify(history))}
 function remaining(){return prizes.reduce((a,p)=>a+Math.max(0,+p.qty||0),0)}
 function update(){const n=remaining();$("#hint").textContent=n?`目前還有 ${n} 份獎品 ✨`:"獎品已全部抽完！";$("#drawBtn").disabled=!n}
@@ -254,7 +259,7 @@ function fireworks(){
   }
   requestAnimationFrame(frame);
 }
-function startDraw(){
+function startDraw(){const playerName=selectedPlayerName();if(drawMode==="name"&&!playerName){$("#hint").textContent="👤 請先選擇本次抽獎者";$("#playerSelect").focus();return;}
   const p=choose(); if(!p)return;
   $("#drawBtn").disabled=true; $("#result").classList.remove("show"); $("#machine").classList.add("spinning","cranking");
   $("#wheel").classList.remove("glow");
@@ -269,24 +274,24 @@ function startDraw(){
     ball.classList.add("drop");
   },4700);
   setTimeout(()=>{
-    $("#machine").classList.remove("cranking");p.qty--;history.unshift({time:new Date().toLocaleString("zh-TW"),tier:p.tier,name:p.name,color:p.color});saveData();renderHistory();update();
-    $("#tier").textContent=p.tier;$("#prize").textContent=p.name;$("#result").classList.add("show");fireworks();
+    $("#machine").classList.remove("cranking");p.qty--;history.unshift({player:playerName,time:new Date().toLocaleString("zh-TW"),tier:p.tier,name:p.name,color:p.color});saveData();renderHistory();update();
+    $("#resultPlayer").textContent=playerName?"👤 "+playerName:"";$("#tier").textContent=p.tier;$("#prize").textContent=p.name;$("#result").classList.add("show");fireworks();
     if(navigator.vibrate)navigator.vibrate([50,40,100]);
   },6100);
 }
 $("#drawBtn").onclick=startDraw;
 $("#centerCrank").onclick=startDraw;
 $("#centerCrank").onkeydown=(e)=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();startDraw()}};
-$("#next").onclick=()=>{$("#result").classList.remove("show");$("#wheel").classList.remove("glow");$("#prizeBall").classList.remove("drop");$("#prizeBall").style.opacity=0;update()}
+$("#next").onclick=()=>{$("#resultPlayer").textContent="";if(drawMode==="name")$("#playerSelect").value="";$("#result").classList.remove("show");$("#wheel").classList.remove("glow");$("#prizeBall").classList.remove("drop");$("#prizeBall").style.opacity=0;update()}
 function openP(id){closePanels();$(id).classList.add("open")}function closePanels(){document.querySelectorAll(".panel").forEach(x=>x.classList.remove("open"))}window.closePanels=closePanels;
 $("#settingsBtn").onclick=()=>{renderEditor();openP("#settingsPanel")};$("#historyBtn").onclick=()=>{renderHistory();openP("#historyPanel")}
 function esc(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]))}
 function renderEditor(){const e=$("#editor");e.innerHTML="";prizes.forEach((p,i)=>{const r=document.createElement("div");r.className="row";r.innerHTML=`<input data-k="tier" value="${esc(p.tier)}"><input data-k="name" value="${esc(p.name)}"><input data-k="qty" type="number" min="0" value="${p.qty}"><input data-k="weight" type="number" min="0" value="${p.weight}"><button class="btn danger">刪除</button>`;r.querySelector("button").onclick=()=>{prizes.splice(i,1);renderEditor()};e.appendChild(r)})}
 $("#add").onclick=()=>{prizes.push({tier:"新獎項",name:"新獎品",qty:1,weight:1,color:FALLBACK_COLORS[prizes.length%FALLBACK_COLORS.length]});renderEditor()}
 $("#save").onclick=()=>{document.querySelectorAll("#editor .row").forEach((r,i)=>{prizes[i].tier=r.querySelector('[data-k="tier"]').value||"未命名";prizes[i].name=r.querySelector('[data-k="name"]').value||"未命名";prizes[i].qty=Math.max(0,+r.querySelector('[data-k="qty"]').value||0);prizes[i].weight=Math.max(0,+r.querySelector('[data-k="weight"]').value||0)});saveData();update();alert("設定已儲存！")}
-function renderHistory(){$("#tbody").innerHTML=history.map((h,i)=>`<tr><td>${history.length-i}</td><td>${esc(h.time)}</td><td>${esc(h.tier)}</td><td>${esc(h.name)}</td></tr>`).join("");$("#stats").textContent=`已抽 ${history.length} 次｜剩餘 ${remaining()} 份獎品`}
+function renderHistory(){$("#tbody").innerHTML=history.map((h,i)=>`<tr><td>${history.length-i}</td><td>${esc(h.player||"—")}</td><td>${esc(h.time)}</td><td>${esc(h.tier)}</td><td>${esc(h.name)}</td></tr>`).join("");$("#stats").textContent=`已抽 ${history.length} 次｜剩餘 ${remaining()} 份獎品`}
 function dl(name,text,type){const b=new Blob([text],{type}),a=document.createElement("a");a.href=URL.createObjectURL(b);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500)}
-$("#csv").onclick=()=>{const rows=[["順序","抽獎時間","獎項","獎品"],...history.slice().reverse().map((h,i)=>[i+1,h.time,h.tier,h.name])];dl("福引轉輪抽獎紀錄.csv","\uFEFF"+rows.map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(",")).join("\n"),"text/csv;charset=utf-8")}
+$("#csv").onclick=()=>{const rows=[["順序","姓名","抽獎時間","獎項","獎品"],...history.slice().reverse().map((h,i)=>[i+1,h.player||"",h.time,h.tier,h.name])];dl("福引轉輪抽獎紀錄.csv","\uFEFF"+rows.map(r=>r.map(v=>`"${String(v).replaceAll('"','""')}"`).join(",")).join("\n"),"text/csv;charset=utf-8")}
 $("#backup").onclick=()=>dl("福引轉輪備份.json",JSON.stringify({prizes,history},null,2),"application/json")
 $("#import").onchange=e=>{const f=e.target.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{const o=JSON.parse(rd.result);if(!Array.isArray(o.prizes))throw 0;prizes=o.prizes;history=Array.isArray(o.history)?o.history:[];saveData();renderEditor();renderHistory();update();alert("匯入完成！")}catch{alert("檔案格式不正確")}};rd.readAsText(f)}
 $("#clear").onclick=()=>{if(confirm("確定清除所有紀錄？")){history=[];saveData();renderHistory()}}
